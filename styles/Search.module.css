@@ -1,0 +1,19 @@
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.separate {
+  height: 1px;
+  border-radius: 20px;
+  background-color: #ff5901;
+}
