@@ -72,7 +72,7 @@ export default function CreateSample ({res}) {
   // console.log(selectedFile);
 
   return (
-    <Layout className={`flex flex-wrap`}>
+    <Layout>
       <form 
         encType="multipart/form-data"
         onSubmit={submitForm} 
@@ -250,7 +250,7 @@ export default function CreateSample ({res}) {
 // Server side renderer - Rendu coté server
 export async function getStaticProps(context) {
   try {
-    const res = await fetch('http://localhost:8080/tracks/')
+    const res = await fetch('http://localhost:8080/tracks/category')
       .then(r => r.json())
       return {
         props: {res}

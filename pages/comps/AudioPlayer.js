@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/AudioPlayer.module.css';
 import Wave from './Wave';
-import { useRouter } from 'next/router';
 import Link from 'next/Link';
 
 
@@ -13,7 +12,6 @@ export default function AudioPlayer (props) {
 
     useEffect(() => {
         setTags(props.track.tags.split(','))
-
     }, [props.track.tags])
 
     return (
@@ -31,7 +29,7 @@ export default function AudioPlayer (props) {
                         <a>
                         <span className="inline-block bg-gray-200 rounded-full px-2 text-xs font-semibold text-gray-700 mr-1 mb-1">#{tag}</span>
                         </a>
-                        </Link>
+                    </Link>
                 ))}
             </div>
             <div className={`${styles.info} py-2 px-6`}>

@@ -36,8 +36,8 @@ export default function Currency({ res, query}) {
     // console.log(query.query);
 
     return (
-      <Layout page={'StouflyDoc/search'}>
-        <div className={`${styles.grid} flex my-2 text-white flex-wrap`}>
+      <Layout>
+        <div className={`${styles.grid} flex my-2 px-5 text-white flex-wrap`}>
           <div  className={`w-full mx-4 my-5 sm:flex sm:p-0`}>
               <h2 className="text-left text-4xl text-white">Resultat pour : {query.query} </h2>
           </div>
@@ -62,9 +62,8 @@ export default function Currency({ res, query}) {
 
 
 export async function getServerSideProps({ query }) {
-    console.log(query);
     try {
-        const res = await fetch('http://localhost:8080/tracks/')
+        const res = await fetch('http://localhost:8080/tracks/category')
           .then(r => r.json())
           return {
             props: {res, query}

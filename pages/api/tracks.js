@@ -9,10 +9,10 @@ export default async function handler(req, res) {
     return
   }
   else if (req.method === 'GET') {
-    const jsonData = await getTracks()
-    const getCats = await getCats()
-    res.status(200).json(jsonData)
-    res.status(200).json(getCats)
+    const getTracks = await getTracks()
+    const getAllTracks = await getAllTracks()
+    res.status(200).json(getTracks)
+    res.status(200).json(getAllTracks)
   } 
   else {res.status(405).json({ error: `Method '${req.method}' Not Allowed` });}
   
@@ -21,9 +21,18 @@ export default async function handler(req, res) {
 }
 
 
-export async function getTracks(category) {
+export async function getTracks(query) {
+  console.log(query);
+  // &_limit=${query._limit}
+  // let url = ``
+  // if (query._limit != undefined) {
+  //   url = `http://localhost:8080/tracks/${query.category !== undefined ? `?category=${query.category}&_limit=${query._limit}` : `?_limit=${query._limit}` }`
+  // } else {
+  //   url = `http://localhost:8080/tracks/?_limit=${5}`
+  // }
+  
   try {
-    const res = await fetch(`http://localhost:8080/tracks/${category !== undefined ? `?category=${category}` : ''}`)
+    const res = await fetch(`http://localhost:8080/tracks/${query.category !== undefined ? `?category=${query.category}` : `` }`)
       .then(r => r.json())
       return {
         props: {res}
@@ -33,4 +42,14 @@ export async function getTracks(category) {
   }
 }
 
-
+export async function getAllTracks() {
+  try {
+    const res = await fetch(`http://localhost:8080/tracks/category`)
+      .then(r => r.json())
+      return {
+        props: {res}
+      }
+  } catch (err) {
+    console.error(err);
+  }
+}
