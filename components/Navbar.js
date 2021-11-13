@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Link from 'next/Link';
-import styles from '../styles/Header.module.css';
+import styles from '../styles/Header.module.scss';
 import { useRouter } from 'next/router';
-
+import Login from '../pages/user/login';
 
 export default function Navbar() {
 
@@ -15,7 +15,9 @@ export default function Navbar() {
   }
 
   return (
-      <header className={`container mx-auto sm:flex sm:justify-between sm:items-center`}>
+    
+    <div className={`${styles.header}`}>
+      <header className={`header container mx-auto sm:flex sm:justify-between sm:items-center`}>
         {/* <div className="flex justify-between px-4 py-3 sm:p-0">
         </div> */}
 
@@ -40,7 +42,10 @@ export default function Navbar() {
         <nav className={`w-2/5 justify-center px-2 pt-2 pb-4 sm:flex sm:p-0`}>
           <Link href="/"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}>Home</a></Link>
           <Link href="/create"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}>Add Sample</a></Link>
+          <Login />
+          {/* <Link href="#"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}><Login /></a></Link> */}
         </nav>
       </header>
+    </div>
   )
 }

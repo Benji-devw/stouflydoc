@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
 import { getTracks, getAllTracks } from './api/tracks';
 import Layout from '../components/Layout';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 import  AudioPlayer  from './comps/AudioPlayer';
 import Link from 'next/Link';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
+// import Filters from './comps/Filters';
 
 
-export default function Home({res, getCats, query}) {
 
-const router = useRouter()
+
+export default function Home({res, allTracks, query}) {
+
+// const router = useRouter()
 
   const [tracks, setTracks] = useState(res.props.res.state)
   const [limit, setLimit] = useState(8)
-  const tracksCat = getCats.props.res;
+  const tracksCat = allTracks.props.res;
   
   const categorySet = new Set(tracksCat.state.map(cat => cat.category));
   const catList = Array.from(categorySet).sort();
@@ -44,7 +47,7 @@ const router = useRouter()
 
   // console.log(limit);
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   return (
     <Layout page={'StouflyDoc'}>
@@ -54,28 +57,33 @@ const router = useRouter()
 
         <button className="absolute left-0 mx-5 my-3 cursor-pointer" onClick={() => setOpen(!open)}>
           {!open ?
-          <IoIosArrowDown style={{color: '#111111'}} className="animate-bounce text-2xl" />
-          :<IoIosArrowUp style={{color: '#111111'}} className="text-2xl" />
+          <IoIosArrowDown className="animate-bounce text-2xl" />
+          :<IoIosArrowUp className="text-2xl" />
           }
         </button>
 
-        <div className={`${open ? styles.accordionOpened : styles.accordionClosed} px-16 grid grid-cols-4 md:grid-cols-6`}>
-          <Link href={`/`} scroll={false} passHref className="md:flex" >
-            <button onClick={() => {setCatActive(undefined), setLimit(8)}} 
-              type="button"
-              className={`${catActive !== undefined ? 'category-btn' : 'category-btn-active'} w-full m-2 text-white py-1 px-8`}
-            >All</button>
-          </Link>
-
-          {catList.map((cat, id) => (
-            // <Link key={id} href={`/?category=${cat}&_limit=${limit}`} scroll={false} passHref >
-            <Link key={id} href={`/?category=${cat}`} scroll={false} passHref className="md:flex" >
-              <button onClick={() => {setCatActive(cat), setLimit(8)}} 
+        <div className={`${open ? styles.accordionOpened : styles.accordionClosed} row-auto px-16`}>
+          <div className=" grid grid-cols-4 md:grid-cols-6">
+            <Link href={`/`} scroll={false} passHref className="md:flex" >
+              <button onClick={() => {setCatActive(undefined), setLimit(8)}} 
                 type="button"
-                className={`${cat !== catActive ? 'category-btn' : 'category-btn-active'} w-full m-2 text-white py-1 px-1`}
-              >{cat}</button>
+                className={`${catActive !== undefined ? 'category-btn' : 'category-btn-active'} w-full m-2 py-1 px-8`}
+              >All</button>
             </Link>
-          ))}
+
+            {catList.map((cat, id) => (
+              // <Link key={id} href={`/?category=${cat}&_limit=${limit}`} scroll={false} passHref >
+              <Link key={id} href={`/?category=${cat}`} scroll={false} passHref className="md:flex" >
+                <button onClick={() => {setCatActive(cat), setLimit(8)}} 
+                  type="button"
+                  className={`${cat !== catActive ? 'category-btn' : 'category-btn-active'} w-full m-2 py-1 px-1`}
+                >{cat}</button>
+              </Link>
+            ))}
+          </div>
+          {/* <div className="relative grid grid-cols-4 md:grid-cols-3">
+            <Filters data={tracks} />
+          </div> */}
         </div>
       </div>
 
@@ -99,6 +107,6 @@ const router = useRouter()
 
 export async function getServerSideProps({query}) {
   const res = await getTracks(query)
-  const getCats = await getAllTracks()
-  return { props: {res, getCats, query} }
+  const allTracks = await getAllTracks()
+  return { props: {res, allTracks, query} }
 }

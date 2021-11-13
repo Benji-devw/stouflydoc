@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '../../styles/AudioPlayer.module.css';
+import styles from '../../styles/AudioPlayer.module.scss';
 import Wave from './Wave';
 import Link from 'next/Link';
 

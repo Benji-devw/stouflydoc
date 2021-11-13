@@ -1,0 +1,99 @@
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+.loadmore {
+  background-color: #111111;
+}
+.loadmore:hover {
+  color: #ff5901;
+}
+
+.accordionContainer {
+  color: #ffffff;
+  overflow: hidden;
+  border: 1px solid #111111;
+  transition-duration: 0.5s;
+  user-select: none;
+  background-color: #111111;
+}
+.accordionContainer:hover {
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+.accordionOpened {
+  height: none;
+}
+.accordionClosed {
+  height: 50px;
+}
+
+.inputRange[type="range"] {
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 2px;
+  /* Add some L/R padding to ensure box shadow of handle is shown */
+  overflow: hidden;
+  border: 0;
+  border-radius: 1px;
+  outline: none;
+  background: linear-gradient(#252525, #252525) no-repeat center;
+  /* Use a linear gradient to generate only the 2px height background */
+  background-size: 100% 2px;
+  pointer-events: none;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-thumb {
+    position: relative;
+    z-index: 10;
+    height: 24px;
+    width: 24px;
+    border: 2px solid #ff5901;
+    border-radius: 24px;
+    background-color: #252525;
+    position: relative;
+    margin: 5px 0;
+    /* Add some margin to ensure box shadow is shown */
+    cursor: pointer;
+    appearance: none;
+    pointer-events: all;
+    box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.multiRange {
+  position: relative;
+  height: 40px;
+
+  input[type="range"] {
+    position: absolute;
+
+    &:nth-child(1) {
+      &::-webkit-slider-thumb::before {
+        background-color: red;
+      }
+    }
+
+    &:nth-child(2) {
+      background: none;
+
+      &::-webkit-slider-thumb::before {
+        background-color: grey;
+      }
+    }
+  }
+}

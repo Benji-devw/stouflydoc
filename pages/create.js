@@ -1,9 +1,9 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 import Image from 'next/image';
-import styles from '../styles/Create.module.css';
-import Layout from "../components/Layout";
-
+import styles from '../styles/Create.module.scss';
+import Layout from '../components/Layout';
+import Button from './comps/Button';
 
 
 export default function CreateSample ({res}) {
@@ -22,6 +22,8 @@ export default function CreateSample ({res}) {
     tags: ``,
     yearCollection: 0,
     comments: ``,
+    price: 0,
+    likes: 0,
     datePost: new Date().toISOString()
   })
 
@@ -52,6 +54,8 @@ export default function CreateSample ({res}) {
     formData.append('tags', datas.tags)
     formData.append('yearCollection', datas.yearCollection)
     formData.append('comments', datas.comments)
+    formData.append('price', datas.price)
+    formData.append('likes', datas.likes)
     formData.append('datePost', datas.datePost)
 
     const config = {
@@ -85,7 +89,7 @@ export default function CreateSample ({res}) {
           <div className="w-full md:w-1/2">
             <div className="text-center p-2">
               <label className="block mb-2" htmlFor="title">
-              Title
+              Titre
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="title" type="text" name="title" onChange={handleChange} 
               />
@@ -98,7 +102,7 @@ export default function CreateSample ({res}) {
               <label className="block mb-2" htmlFor="tempo">
               bpm
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tempo" type="number" name="tempo" onChange={handleChange} 
+                id="tempo" type="number" name="tempo" onChange={handleChange} placeholder="160"
               />
               </label>
             </div>
@@ -109,7 +113,7 @@ export default function CreateSample ({res}) {
           <div className="w-full md:w-1/2">
             <div className="text-center p-2">
               <label className="block mb-2" htmlFor="category">
-              Ajouter une Categories
+              Ajouter une Categorie
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="category" type="text" name="category" onChange={handleChange} 
                 // disabled={true}
@@ -154,9 +158,10 @@ export default function CreateSample ({res}) {
           <div className="w-full md:w-1/2">
               <div className="text-center p-2">
                 <label className="block mb-2" htmlFor="tags">
-                Tags
+                Mot-clé
                 <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="tags" type="text" name="tags" onChange={handleChange} 
+                  placeholder="Kick,Loop,Hi-Hat"
                 />
                 </label>
               </div>
@@ -165,7 +170,7 @@ export default function CreateSample ({res}) {
           <div className="w-full md:w-1/2">
             <div className="text-center p-2">
               <label className="block mb-2" htmlFor="yearCollection">
-              Collection
+              Année
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="yearCollection" type="number" min="2021" name="yearCollection" onChange={handleChange} 
               />
@@ -178,7 +183,7 @@ export default function CreateSample ({res}) {
         <div className="w-full md:w-1/2">
             <div className="text-center p-2">
               <label className="block mb-2" htmlFor="reporter">
-              By
+              Posté par
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="reporter" type="text" name="reporter" onChange={handleChange} 
               />
@@ -189,13 +194,37 @@ export default function CreateSample ({res}) {
           <div className="w-full md:w-1/2">
             <div className="text-center p-2">
               <label className="block mb-2" htmlFor="comments">
-              Comments
+              Commentaire
               <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="comments" type="text" name="comments" onChange={handleChange} 
               />
               </label>
             </div>
           </div>
+        </div>
+
+        <div className="flex content-center flex-wrap">
+
+          <div className="w-full md:w-1/2">
+            {/* <div className="text-center p-2">
+              <label className="block mb-2" htmlFor="likes">
+              Likes
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="likes" type="number" min="2021" name="likes" onChange={handleChange} 
+              />
+              </label>
+            </div> */}
+          </div>
+          <div className="w-full md:w-1/2">
+              <div className="text-center p-2">
+                <label className="block mb-2" htmlFor="price">
+                Prix
+                <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="price" type="number" name="price" onChange={handleChange} placeholder="3.20 1 0.25"
+                />
+                </label>
+              </div>
+            </div>
         </div>
     
         <div className="mt-1 flex justify-center my-3 px-3 pt-3 pb-3 border-2 border-gray-300 border-dashed rounded-md">
@@ -235,10 +264,10 @@ export default function CreateSample ({res}) {
 
            
      
-        <div className={`${styles.send} flex items-center justify-between`}>
-          <button type="submit" className="text-white text-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <div className={`flex items-center justify-between`}>
+          <Button>
             Send
-          </button>
+          </Button>
         </div>
 
       </form>

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Script from 'next/script'
-import styles from '../../styles/AudioPlayer.module.css';
+import styles from '../../styles/AudioPlayer.module.scss';
 import {BsClock} from 'react-icons/bs';
 import {AiOutlineDownload} from 'react-icons/ai';
 import Link from 'next/Link';
@@ -10,7 +9,7 @@ import Link from 'next/Link';
 export default function Wave (props) {
 
     const waveformRef = useRef(null);
-    const wavesurfer = useRef(null);
+    const wavesurfer = useRef(waveformRef);
 
     const [isPlaying, setIsPlaying] = useState(false)
 
@@ -73,9 +72,6 @@ export default function Wave (props) {
                 <Link href={props.url} download passHref><a><AiOutlineDownload /></a></Link>
                 </span>
             </div>
-
-            <Script src="https://unpkg.com/wavesurfer.js" strategy="beforeInteractive"></Script>
         </>
-
     )
 }

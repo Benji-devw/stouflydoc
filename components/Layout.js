@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from './Navbar';
-import styles from '../styles/Layout.module.css';
-
+import styles from '../styles/Layout.module.scss';
+import Script from 'next/dist/client/script';
 
 export default function Layout({children, page}) {
   return (
@@ -14,9 +14,7 @@ export default function Layout({children, page}) {
         <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet"/>
       </Head>
 
-      <div className={`${styles.header}`}>
-        <Navbar />
-      </div>
+      <Navbar />
 
       <div className="container mx-auto px-4">
       <main className={`${styles.main}`}>
@@ -44,6 +42,7 @@ export default function Layout({children, page}) {
         }
       `}
       </style>
+      <Script src="https://unpkg.com/wavesurfer.js" strategy="beforeInteractive"></Script>
     </div>
   )
 }
