@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getTracks, getAllTracks } from './api/tracks';
-import Layout from '../components/Layout';
-import styles from '../styles/Home.module.scss';
+import Layout from '@/components/Layout';
+import styles from '@/styles/Home.module.scss';
 import  AudioPlayer  from './comps/AudioPlayer';
 import Link from 'next/Link';
 // import { useRouter } from 'next/router';

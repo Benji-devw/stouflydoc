@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '../../styles/AudioPlayer.module.scss';
+import styles from '@/styles/AudioPlayer.module.scss';
 import {BsClock} from 'react-icons/bs';
 import {AiOutlineDownload} from 'react-icons/ai';
 import Link from 'next/Link';

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import styles from '../styles/Create.module.scss';
-import Layout from '../components/Layout';
+import styles from '@/styles/Create.module.scss';
+import Layout from '@/components/Layout';
 import Button from './comps/Button';
 
 

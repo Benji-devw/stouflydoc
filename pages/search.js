@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Layout from '../components/Layout';
-import styles from '../styles/Search.module.scss';
+import Layout from '@/components/Layout';
+import styles from '@/styles/Search.module.scss';
 import AudioPlayer from "./comps/AudioPlayer";
 
 

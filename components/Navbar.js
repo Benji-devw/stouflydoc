@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/Link';
-import styles from '../styles/Header.module.scss';
+import styles from '@/styles/Header.module.scss';
 import { useRouter } from 'next/router';
 import Login from '../pages/user/login';
+
+
+
 
 export default function Navbar() {
 
@@ -13,6 +16,23 @@ export default function Navbar() {
     if (searchEnter === '' || searchEnter.length < 3) return;
     if(e.key === 'Enter') router.push(`/search?query=${searchEnter}`)
   }
+
+  const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //     const subscription = userService.user.subscribe(x => setUser(x));
+  //     return () => subscription.unsubscribe();
+  // }, []);
+
+  // function logout() {
+  //   userService.logout();
+  // }
+
+  // only show nav when logged in
+  // if (!user) return null;
+
+
+
 
   return (
     

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
 
 export async function getTracks(query) {
-  console.log(query);
+  // console.log(query);
   // &_limit=${query._limit}
   // let url = ``
   // if (query._limit != undefined) {

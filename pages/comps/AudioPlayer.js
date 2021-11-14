@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '../../styles/AudioPlayer.module.scss';
+import styles from '@/styles/AudioPlayer.module.scss';
 import Wave from './Wave';
 import Link from 'next/Link';
 
@@ -27,7 +27,7 @@ export default function AudioPlayer (props) {
                 {tags.map((tag, id) => (
                     <Link key={id} href={`/search?query=${tag}`} >
                         <a>
-                        <span className="inline-block bg-gray-200 rounded-full px-2 text-xs font-semibold text-gray-700 mr-1 mb-1">#{tag}</span>
+                        <span className="inline-block bg-gray-200 rounded-full px-2 text-sm font-semibold text-gray-700 mr-1 mb-1">#{tag}</span>
                         </a>
                     </Link>
                 ))}

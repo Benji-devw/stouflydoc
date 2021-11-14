@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from './Navbar';
-import styles from '../styles/Layout.module.scss';
+import styles from '@/styles/Layout.module.scss';
 import Script from 'next/dist/client/script';
 
 export default function Layout({children, page}) {
