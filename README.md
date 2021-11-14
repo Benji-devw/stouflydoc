@@ -1,6 +1,6 @@
 # StouflyDoc
 
-![alt text](https://github.com/Benji-devw/stouflydoc/blob/dev/public/Preview.png?raw=true)
+![alt text](https://github.com/Benji-devw/stouflydoc/public/Preview.png?raw=true)
 
 
 ## Available Scripts
