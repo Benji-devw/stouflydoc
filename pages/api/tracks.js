@@ -1,24 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default async function handler(req, res) {
-  // console.log(req.method);
-
-  if (req.method === 'POST') {
-    console.log('POST');
-    res.status(200).json({ data: 'success' });
-    return
-  }
-  else if (req.method === 'GET') {
-    const getTracks = await getTracks()
-    const getAllTracks = await getAllTracks()
-    res.status(200).json(getTracks)
-    res.status(200).json(getAllTracks)
-  } 
-  else {res.status(405).json({ error: `Method '${req.method}' Not Allowed` });}
-  
-  const body = JSON.parse(req.body)
-  // console.log(body);
-}
+import axios from 'axios';
 
 
 export async function getTracks(query) {
@@ -44,12 +24,25 @@ export async function getTracks(query) {
 
 export async function getAllTracks() {
   try {
-    const res = await fetch(`http://localhost:8080/tracks/category`)
-      .then(r => r.json())
-      return {
-        props: {res}
-      }
+    const res = await fetch(`http://localhost:8080/tracks/all`)
+    .then(r => r.json())
+    return {
+      props: {res}
+    }
   } catch (err) {
     console.error(err);
   }
 }
+
+
+export async function postTrack(payload) {
+
+  await axios
+  .post('http://localhost:8080/tracks', payload)
+  .then((res) => {
+    console.log("File Upload success");
+  })
+  .catch((err) => console.log("File Upload Error"));
+}
+
+

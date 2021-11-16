@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getAllTracks } from './api/tracks';
 import Layout from '@/components/Layout';
 import styles from '@/styles/Search.module.scss';
 import AudioPlayer from "./comps/AudioPlayer";
 
 
 export default function Currency({ res, query}) {
-    const [tracks, setTracks] = useState(res.state)
+    const [tracks, setTracks] = useState(res.props.res.state)
 
     /***************************/
     /***** SearchBar Filters *****/
@@ -62,13 +63,6 @@ export default function Currency({ res, query}) {
 
 
 export async function getServerSideProps({ query }) {
-    try {
-        const res = await fetch('http://localhost:8080/tracks/category')
-          .then(r => r.json())
-          return {
-            props: {res, query}
-          }
-      } catch (err) {
-        console.error(err);
-      }
+  const res = await getAllTracks()
+  return { props: {res, query} }
   }

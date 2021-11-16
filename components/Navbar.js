@@ -3,6 +3,7 @@ import Link from 'next/Link';
 import styles from '@/styles/Header.module.scss';
 import { useRouter } from 'next/router';
 import Login from '../pages/user/login';
+import Registration from '../pages/user/register';
 
 
 
@@ -63,6 +64,7 @@ export default function Navbar() {
           <Link href="/"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}>Home</a></Link>
           <Link href="/create"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}>Add Sample</a></Link>
           <Login />
+          <Registration />
           {/* <Link href="#"><a className={`block px-2 py-1 text-white rounded hover:bg-gray-800`}><Login /></a></Link> */}
         </nav>
       </header>
