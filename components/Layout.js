@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import styles from '@/styles/Layout.module.scss';
 import Script from 'next/dist/client/script';
 
+
 export default function Layout({children, page}) {
   return (
     <div className={`${styles.layout}`}>

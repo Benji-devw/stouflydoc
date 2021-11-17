@@ -1,5 +1,4 @@
 import React, {useRef} from "react";
-import { Register } from '../api/users';
 import styled from "styled-components";
 import Button from '../comps/Button';
 import Image from "next/image";
@@ -16,10 +15,12 @@ const Content = styled.div`
 `;
 
 
-export default function Registration () {
+export default function Registration() {
+
 
   const wrapperRef = useRef(null);
   const [showModal, setShowModal] = React.useState(false);
+  const [handleError, setHandleError] = React.useState('');
 
 
   function handleClickOutside(e) {
@@ -27,9 +28,16 @@ export default function Registration () {
   }
 
 
-  const handleSubmit = (e) => {
-    Register(e)
-    // console.log(JSON.stringify(e));
+  const handleSubmit = async (event) => {
+    const res = await fetch("http://localhost:8080/user/register", {
+      body: JSON.stringify(event),
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST'
+    });
+    const result = await res.json();
+    console.log(result);
+    setHandleError(result.message);
+
       // setTimeout(() => {
       //   alert(JSON.stringify(e));
       // }, 400);
@@ -37,7 +45,7 @@ export default function Registration () {
 
   return (
     <>
-      <span className="cursor-pointer block px-2 py-1 text-white rounded hover:bg-gray-800" onClick={() => setShowModal(true)} > Register </span>
+      <span className="fadeIn cursor-pointer block px-2 py-1 text-white rounded hover:bg-gray-800 flex flex-wrap content-center" onClick={() => setShowModal(true)} > Register </span>
       {showModal ? (
         <>
           <div 
@@ -50,8 +58,8 @@ export default function Registration () {
                 <Image className="hidden" src='/images/register.jpg' alt='test' width='450px' height='100%'/>
               </div>
               <Formik
-                initialValues={{  name:'', email: '', password: '', confirm: '', createdOn: new Date().toISOString() }}
-                onSubmit={e => handleSubmit(e)}
+                initialValues={{  name:'benjamin navarro', email: 'navarro.benj@gmail.com', password: 'ee', confirm: 'ee', createdOn: new Date().toISOString() }}
+                onSubmit={handleSubmit}
                 validationSchema={RegistrationSchema}
               >
                 {({
@@ -59,11 +67,11 @@ export default function Registration () {
                   /* and other goodies */
                 }) => (
                   <form onSubmit={handleSubmit}
-                    className="grid bg-white shadow-md px-10 py-5"
+                    className="grid w-96 bg-white shadow-md px-10 py-5"
                   >
                     <h2 className="text-2xl font-bold mb-5 text-center text-gray-900">Register</h2>
 
-                    <label className="block text-gray-700 text-sm font-bold mt-2" htmlFor="name"> Name: <span className="text-red-400">{errors.name && touched.name && errors.name}</span> </label>
+                    <label className="block text-gray-700 text-sm font-bold mt-2" htmlFor="name"> Name: <span className="text-red-400">{handleError === 'Nom déjà utilisé !' ? handleError : errors.name && touched.name && errors.name}</span> </label>
                     <input
                       type="name"
                       name="name"
@@ -73,7 +81,7 @@ export default function Registration () {
                       className="shadow appearance-none border w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
                     />
                     
-                    <label className="block text-gray-700 text-sm font-bold mt-2" htmlFor="Email"> Email: <span className="text-red-400">{errors.email && touched.email && errors.email}</span> </label>
+                    <label className="block text-gray-700 text-sm font-bold mt-2" htmlFor="Email"> Email: <span className="text-red-400">{handleError === 'Email déjà utilisé !' ? handleError : errors.email && touched.email && errors.email}</span> </label>
                     <input
                       type="email"
                       name="email"

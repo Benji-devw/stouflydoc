@@ -40,10 +40,10 @@ export default function Wave (props) {
             container: waveformRef.current,
             waveColor: '#ff5901',
             progressColor: 'orange',
-            barWidth: 3,
+            barWidth: 2,
             responsive: true,
             hideScrollbar: true,
-            barRadius: 1
+            // barRadius: 1
         })
         wavesurfer.current.load(props.url);
         wavesurfer.current.on("ready", function() {
